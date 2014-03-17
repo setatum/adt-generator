@@ -11,7 +11,30 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<name>ADT Generator</name>
 	<description>Used to generate random ADT records for testing purposes</description>
+	<url>git@github.com:setatum/adt-generator.git</url>
+	<scm>
+		<connection>scm:git:git@github.com:setatum/adt-generator.git</connection>
+		<developerConnection>scm:git:git@github.com:setatum/adt-generator.git</developerConnection>
+		<url>https://github.com/setatum/adt-generator</url>
+	</scm>
+
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<dependencies>
 		<dependency>
