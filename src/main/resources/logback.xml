@@ -1,0 +1,111 @@
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator" />
+
+
+	<appender name="ADT-GENERATOR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${medseek.dir}/log/adt-generator.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${medseek.dir}/log/adt-generator.%d{yyyy-MM-dd}.log.zip
+			</FileNamePattern>
+		</rollingPolicy>
+		<maxHistory>7</maxHistory>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+<!-- 
+	<appender name="MEDITECH"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${medseek.dir}/log/meditech.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${medseek.dir}/log/meditech.%d{yyyy-MM-dd}.log.zip
+			</FileNamePattern>
+		</rollingPolicy>
+		<maxHistory>7</maxHistory>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+-->
+
+<!--
+	<appender name="POR" class="ch.qos.logback.classic.net.SMTPAppender">
+		<SMTPHost>Ricohemailgateway.hhsc.ca</SMTPHost>
+		<to>privacy@hhsc.ca</to>
+		<from>clinicalconnect@hhsc.ca</from>
+		<subject>eConnect - POR Override - ${ec.app.mode}</subject>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} %m%n</pattern>
+		</layout>
+		<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTrackerImpl">
+			<bufferSize>1</bufferSize>
+		</cyclicBufferTracker>
+	</appender>
+-->
+
+<!-- 
+	<logger name="com.medseek.clinical.util.stax.HttpStaxClient"
+		level="DEBUG" additivity="false">
+		<appender-ref ref="MEDITECH" />
+	</logger>
+
+	<logger
+		name="com.medseek.clinical.stripes.action.admin.SecurityLogActionBean"
+		level="DEBUG" additivity="false">
+		<appender-ref ref="SECURITYLOG" />
+	</logger>
+
+	<logger
+		name="com.medseek.clinical.stripes.interceptor.PhysicianOfRecordInterceptor.porLog"
+		additivity="false">
+		<appender-ref ref="POR" />
+	</logger>
+
+	<logger name="org.hibernate" level="WARN" />
+	<logger name="net.sf.hibernate.type" level="ERROR" />
+	<logger name="net.sourceforge.stripes" level="WARN" />
+	<logger name="org.hibernate.SQL" level="OFF" />
+	<logger
+		name="com.medseek.clinical.util.stax.HttpStaxClientConnectionPoolImpl"
+		level="TRACE" />
+	<logger name="com.medseek.clinical.util.MedseekBlockingQueue"
+		level="TRACE" />
+-->
+
+	<logger name="httpclient.wire" level="OFF" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.apache.catalina" level="ERROR" />
+	<logger name="org.apache.cxf" level="WARN" />
+	<logger name="org.apache.commons.configuration.ConfigurationFactory"
+		level="ERROR" />
+
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.apache.cxf.common.injection.ResourceInjector"
+		level="WARN" />
+
+	<!-- These are here in case we want to enable them later -->
+	<logger name="jdbc" level="OFF" />
+	<logger name="log4jdbc" level="OFF" />
+	<logger name="jdbc.sqlonly" level="OFF" />
+	<logger name="jdbc.sqltiming" level="OFF" />
+	<logger name="jdbc.audit" level="OFF" />
+	<logger name="jdbc.resultset" level="OFF" />
+	<logger name="jdbc.resultsettable" level="OFF" />
+	<logger name="jdbc.connection" level="OFF" />
+	<logger name="ch.qos.logback" level="OFF" />
+
+	<root level="INFO">
+		<appender-ref ref="ADT-GENERATOR" />
+	</root>
+
+<!-- 
+	<root level="INFO">
+		<appender-ref ref="MEDITECH" />
+	</root>
+-->
+</configuration>

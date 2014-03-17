@@ -2,12 +2,20 @@ package com.medseek.clinical.generator.adt.builder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
 
+@Component
 public class NameBuilder {
+	private static final Logger logger = LoggerFactory.getLogger(NameBuilder.class);
+
 	private String firstNameFilePath;
 	private String lastNameFileStrPath;
 	private ImmutableList<String> firstNameList;
@@ -21,14 +29,30 @@ public class NameBuilder {
 		try {
 			firstNameList = Files.asCharSource(new File(this.firstNameFilePath), Charsets.UTF_8).readLines();
 			lastNameList = Files.asCharSource(new File(this.lastNameFileStrPath), Charsets.UTF_8).readLines();
-			System.out.println("Loaded " + firstNameList.size() + " first names.");
-			System.out.println("Loaded " + lastNameList.size() + " last names.");
+			logger.info("Loaded " + firstNameList.size() + " first names.");
+			logger.info("Loaded " + lastNameList.size() + " last names.");
 		}
 		catch (IOException e) {
-			System.out.println("Failed to read first and/or last name files: " + e);
+			logger.error("Failed to read first and/or last name files: " + e);
 		}
 	}
 
+	public String getRandomFirstName() {
+		return firstNameList.get(ThreadLocalRandom.current().nextInt(0, firstNameList.size()));
+	}
+
+	public String getRandomLastName() {
+		return lastNameList.get(ThreadLocalRandom.current().nextInt(0, lastNameList.size()));
+	}
+
+	public String getRandomFullName() {
+		StringBuilder buffer = new StringBuilder(64);
+		buffer.append(getRandomFirstName());
+		buffer.append(" ");
+		buffer.append(getRandomLastName());
+		return buffer.toString();
+	}
+	
 	public String getFirstNameFilePath() {
 		return firstNameFilePath;
 	}
